@@ -57,6 +57,7 @@ docker-compose up -d --build
 docker-compose logs -f
 ```
 
+
 Services will be available at:
 - **FastAPI Microservice**: http://localhost:8000
 - **Swagger Documentation**: http://localhost:8000/docs

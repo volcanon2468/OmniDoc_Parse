@@ -53,6 +53,7 @@ Configuration is handled dynamically via Pydantic `BaseSettings` (`python-micros
 
 ## Method 1: Docker Compose (Recommended)
 
+
 ### Step 1: Start the Service
 ```bash
 docker-compose up -d --build
