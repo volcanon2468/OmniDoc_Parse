@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  python-microservice:
+    build:
+      context: ./python-microservice
+    container_name: docprocessing-python-service-prod
+    environment:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=WARNING
+    volumes:
+      - ./yolov8n.pt:/microservice/yolov8n.pt:ro
+    networks:
+      - docprocessing-network
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+
+  nginx:
+    image: nginx:alpine
+    container_name: docprocessing-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - python-microservice
+    networks:
+      - docprocessing-network
+    restart: always
+
+networks:
+  docprocessing-network:
+    driver: bridge
