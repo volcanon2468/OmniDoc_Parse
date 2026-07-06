@@ -36,6 +36,8 @@ class NLPProcessor:
         for doc_type, keywords in self.doc_keywords.items():
             count = sum((1 for keyword in keywords if keyword in text))
             scores[doc_type] = count / len(keywords)
+        if not scores:
+            return {'type': 'unknown', 'confidence': 0.0, 'scores': {}}
         max_score = max(scores.values())
         if max_score > 0:
             doc_type = max(scores.items(), key=lambda x: x[1])[0]

@@ -30,3 +30,5 @@ yolov8n.pt
 *.log
 scratch/
 
+*.md
+!README.md
